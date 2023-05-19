@@ -1,4 +1,4 @@
- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -10,10 +10,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <pulsar.version>3.0.0</pulsar.version>
         <camel.version>4.0.0-M3</camel.version>
         <jackson.version>2.14.2</jackson.version>
+        <nifi-nar-maven-plugin.version>1.5.0</nifi-nar-maven-plugin.version>
 
         <formatter-maven-plugin.version>2.22.0</formatter-maven-plugin.version>
         <impsort-maven-plugin.version>1.8.0</impsort-maven-plugin.version>
@@ -170,17 +172,19 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${maven-shade-plugin.version}</version>
+                <groupId>org.apache.nifi</groupId>
+                <artifactId>nifi-nar-maven-plugin</artifactId>
+                <version>${nifi-nar-maven-plugin.version}</version>
+                <extensions>true</extensions>
                 <configuration>
-                    <!-- put your configurations here -->
+                    <finalName>${project.artifactId}-${project.version}</finalName>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>default-nar</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>nar</goal>
                         </goals>
                     </execution>
                 </executions>

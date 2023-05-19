@@ -12,7 +12,6 @@ import org.apache.pulsar.client.api.schema.GenericObject;
 import org.apache.pulsar.client.api.schema.GenericRecord;
 import org.apache.pulsar.functions.api.Context;
 import org.apache.pulsar.functions.api.Record;
-import org.apache.pulsar.functions.api.utils.FunctionRecord;
 
 public class Function implements org.apache.pulsar.functions.api.Function<byte[], Record<GenericObject>> {
     private static final String CONFIG_KEY_ROUTE = "route";
@@ -72,11 +71,16 @@ public class Function implements org.apache.pulsar.functions.api.Function<byte[]
             context.getOutputTopic(),
             String.class);
 
-        return context
+        /*
+        context
                 .newOutputRecordBuilder(record.getSchema())
                 .destinationTopic(outTopic)
                 .value(result.getMessage().getBody())
                 .properties(record.getProperties())
                 .build();
+
+         */
+
+        return null;
     }
 }
