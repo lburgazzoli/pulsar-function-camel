@@ -105,27 +105,30 @@
     </plugins>
   </build>
   <properties>
-    <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
-    <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-    <maven-failsafe-plugin.version>3.0.0</maven-failsafe-plugin.version>
-    <maven-release-plugin.version>3.0.0</maven-release-plugin.version>
-    <versions-maven-plugin.version>2.15.0</versions-maven-plugin.version>
-    <maven-shade-plugin.version>3.3.0</maven-shade-plugin.version>
-    <formatter-maven-plugin.version>2.22.0</formatter-maven-plugin.version>
-    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-    <nifi.version>1.5.0</nifi.version>
-    <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
-    <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
-    <maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
-    <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
-    <maven-enforcer-plugin.version>3.2.1</maven-enforcer-plugin.version>
-    <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+    <jackson.version>2.14.2</jackson.version>
     <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
     <impsort-maven-plugin.version>1.8.0</impsort-maven-plugin.version>
+    <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+    <versions-maven-plugin.version>2.15.0</versions-maven-plugin.version>
+    <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
+    <formatter-maven-plugin.version>2.22.0</formatter-maven-plugin.version>
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+    <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
+    <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
+    <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
     <pulsar.version>3.0.0</pulsar.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <camel.version>4.0.0-M3</camel.version>
+    <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
+    <maven-release-plugin.version>3.0.0</maven-release-plugin.version>
+    <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+    <maven-failsafe-plugin.version>3.1.0</maven-failsafe-plugin.version>
+    <build-helper-maven-plugin.version>3.4.0</build-helper-maven-plugin.version>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+    <nifi-nar-maven-plugin.version>1.5.0</nifi-nar-maven-plugin.version>
     <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
   </properties>
 </project>
