@@ -18,7 +18,8 @@ import org.apache.pulsar.functions.api.Context;
 import org.apache.pulsar.functions.api.Record;
 
 public class CamelFunction implements org.apache.pulsar.functions.api.Function<GenericObject, Record<GenericObject>> {
-    private static final String CONFIG_KEY_ROUTE = "route";
+    public static final String CONFIG_KEY_ROUTE = "route";
+    public static final String CONFIG_KEY_ROUTE_LANGUAGE = "routeLanguage";
 
     private final CamelContext camel;
     private final ProducerTemplate template;
@@ -34,9 +35,13 @@ public class CamelFunction implements org.apache.pulsar.functions.api.Function<G
     public void initialize(Context context) throws Exception {
         context.getLogger().info("initialize");
 
+        String lang = context.getUserConfigValue(CONFIG_KEY_ROUTE_LANGUAGE)
+            .map(String.class::cast)
+            .orElse("yaml");
+
         Resource res = context.getUserConfigValue(CONFIG_KEY_ROUTE)
             .map(String.class::cast)
-            .map(in ->  ResourceHelper.fromString(context.getFunctionId() + ".yaml", in))
+            .map(in ->  ResourceHelper.fromString(context.getFunctionId() + "." + lang, in))
             .orElseThrow(() -> new IllegalArgumentException("Missing route config"));
 
         PluginHelper.getRoutesLoader(camel).loadRoutes(res);
@@ -110,7 +115,7 @@ public class CamelFunction implements org.apache.pulsar.functions.api.Function<G
         return context
                 .newOutputRecordBuilder(outSchema)
                 .destinationTopic(outTopic)
-                .value(nativeObject)
+                .value(result.getMessage().getBody())
                 .properties(outProperties)
                 .build();
     }

@@ -79,19 +79,21 @@
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>${maven-enforcer-plugin.version}</version>
         </plugin>
+        <plugin>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>${maven-shade-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <release>17</release>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>${maven-shade-plugin.version}</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -102,12 +104,153 @@
         </executions>
         <configuration />
       </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.9.3</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>junit-jupiter-api</artifactId>
+          <groupId>org.junit.jupiter</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>junit-jupiter-params</artifactId>
+          <groupId>org.junit.jupiter</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>junit-jupiter-engine</artifactId>
+          <groupId>org.junit.jupiter</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.pulsar</groupId>
+      <artifactId>pulsar-functions-local-runner-original</artifactId>
+      <version>3.0.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>*</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>pulsar-functions-runtime</artifactId>
+          <groupId>org.apache.pulsar</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>log4j-slf4j-impl</artifactId>
+          <groupId>org.apache.logging.log4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>log4j-api</artifactId>
+          <groupId>org.apache.logging.log4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>log4j-core</artifactId>
+          <groupId>org.apache.logging.log4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>perfmark-api</artifactId>
+          <groupId>io.perfmark</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-all</artifactId>
+      <version>1.45.1</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>grpc-api</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-auth</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-context</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-core</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-grpclb</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-netty</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-okhttp</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-protobuf</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-rls</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-services</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-stub</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-testing</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>grpc-xds</artifactId>
+          <groupId>io.grpc</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>pulsar</artifactId>
+      <version>1.18.1</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>testcontainers</artifactId>
+          <groupId>org.testcontainers</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <properties>
     <jackson.version>2.14.2</jackson.version>
     <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
     <impsort-maven-plugin.version>1.8.0</impsort-maven-plugin.version>
+    <junit.version>5.9.3</junit.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <versions-maven-plugin.version>2.15.0</versions-maven-plugin.version>
     <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
@@ -116,6 +259,7 @@
     <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
     <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
     <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
+    <testcontainers.version>1.18.1</testcontainers.version>
     <pulsar.version>3.0.0</pulsar.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
     <camel.version>4.0.0-M3</camel.version>
