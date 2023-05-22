@@ -2,11 +2,14 @@
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout
-                pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+                pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c:%L - %m%n" />
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="info" additivity="false">
+        <Logger name="pulsar.container" level="WARN">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Root level="info">
             <AppenderRef ref="console" />
         </Root>
     </Loggers>

@@ -11,15 +11,13 @@ import org.apache.camel.TypeConversionException;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.support.PluginHelper;
-import org.apache.camel.support.ResourceHelper;
 import org.apache.pulsar.client.api.Schema;
 import org.apache.pulsar.client.api.schema.GenericObject;
 import org.apache.pulsar.functions.api.Context;
 import org.apache.pulsar.functions.api.Record;
 
 public class CamelFunction implements org.apache.pulsar.functions.api.Function<GenericObject, Record<GenericObject>> {
-    public static final String CONFIG_KEY_ROUTE = "route";
-    public static final String CONFIG_KEY_ROUTE_LANGUAGE = "routeLanguage";
+    public static final String CONFIG_KEY_STEPS = "steps";
 
     private final CamelContext camel;
     private final ProducerTemplate template;
@@ -29,21 +27,9 @@ public class CamelFunction implements org.apache.pulsar.functions.api.Function<G
         this.template = this.camel.createProducerTemplate();
     }
 
-
-
     @Override
     public void initialize(Context context) throws Exception {
-        context.getLogger().info("initialize");
-
-        String lang = context.getUserConfigValue(CONFIG_KEY_ROUTE_LANGUAGE)
-            .map(String.class::cast)
-            .orElse("yaml");
-
-        Resource res = context.getUserConfigValue(CONFIG_KEY_ROUTE)
-            .map(String.class::cast)
-            .map(in ->  ResourceHelper.fromString(context.getFunctionId() + "." + lang, in))
-            .orElseThrow(() -> new IllegalArgumentException("Missing route config"));
-
+        Resource res = CamelFunctionSupport.loadSteps(context);
         PluginHelper.getRoutesLoader(camel).loadRoutes(res);
 
         camel.start();
@@ -72,11 +58,11 @@ public class CamelFunction implements org.apache.pulsar.functions.api.Function<G
             record.getMessage().orElseThrow().getSchemaVersion(),
             record);
 
-        Exchange result = template.request("direct:in", e -> {
+        Exchange result = template.request("direct:" + context.getFunctionId(), e -> {
             Message m = e.getMessage();
             m.setBody(input.getNativeObject());
             e.setProperty("pulsar.apache.org/function.id", context.getFunctionId());
-            e.setProperty("pulsar.apache.org/function.topic.output", context.getOutputTopic());
+            e.setProperty("pulsar.apache.org/function.output", context.getOutputTopic());
             e.setProperty("pulsar.apache.org/record.topic", record.getTopicName());
             e.setProperty("pulsar.apache.org/record.schema", record.getSchema());
 
@@ -94,7 +80,7 @@ public class CamelFunction implements org.apache.pulsar.functions.api.Function<G
         });
 
         String outTopic = result.getProperty(
-            "pulsar.apache.org/function.topic.output",
+            "pulsar.apache.org/function.output",
             context.getOutputTopic(),
             String.class);
         Schema outSchema = result.getProperty(

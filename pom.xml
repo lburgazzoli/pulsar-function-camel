@@ -63,9 +63,9 @@
         </dependency>
 
         <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-all</artifactId>
-            <version>1.45.1</version>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
@@ -125,6 +125,13 @@
             <scope>test</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-all</artifactId>
+            <version>1.45.1</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.pulsar</groupId>
@@ -244,6 +251,11 @@
                     <artifactId>maven-shade-plugin</artifactId>
                     <version>${maven-shade-plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.nifi</groupId>
+                    <artifactId>nifi-nar-maven-plugin</artifactId>
+                    <version>${nifi-nar-maven-plugin.version}</version>
+                </plugin>
 
             </plugins>
         </pluginManagement>
@@ -257,16 +269,18 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
+                <groupId>org.apache.nifi</groupId>
+                <artifactId>nifi-nar-maven-plugin</artifactId>
+                <extensions>true</extensions>
                 <configuration>
-                    <!-- put your configurations here -->
+                    <finalName>${project.artifactId}-${project.version}</finalName>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>default-nar</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>nar</goal>
                         </goals>
                     </execution>
                 </executions>

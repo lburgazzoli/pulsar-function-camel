@@ -30,7 +30,7 @@ public class CamelFunctionTest extends PulsarTestSupport {
 
     @Container
     private static final PulsarContainer PULSAR = new PulsarContainer(IMAGE)
-        .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(PulsarContainer.class)));
+        .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("pulsar.container")));
 
     private LocalRunner runner(String route) {
         FunctionConfig cfg = new FunctionConfig();
@@ -40,8 +40,7 @@ public class CamelFunctionTest extends PulsarTestSupport {
         cfg.setInputs(Collections.singleton("sensors"));
         cfg.setOutput("output-1");
         cfg.setUserConfig(Map.of(
-            CamelFunction.CONFIG_KEY_ROUTE, route,
-            CamelFunction.CONFIG_KEY_ROUTE_LANGUAGE, "yaml"
+            CamelFunction.CONFIG_KEY_STEPS, route
         ));
 
         return LocalRunner.builder()
@@ -53,32 +52,29 @@ public class CamelFunctionTest extends PulsarTestSupport {
     @Test
     public void test() throws Exception {
         String route = """
-            - from:
-                uri: 'direct:in'
-                steps:
-                - setHeader:
-                    name: "source"
-                    jq: '.source'
-                - choice:
-                    when:
-                    - jq: '.source == "sensor-1"'
-                      steps:
-                      - setProperty:
-                          name: 'pulsar.apache.org/function.topic.output'
-                          constant: 'far'
-                      - setBody:
-                          jq:
-                            expression: '.data'
-                            resultType: 'java.lang.String'
-                    - jq: '.source == "sensor-2"'
-                      steps:
-                      - setProperty:
-                          name: 'pulsar.apache.org/function.topic.output'
-                          constant: 'near'
-                      - setBody:
-                          jq:
-                            expression: '.data'
-                            resultType: 'java.lang.String'
+            - setHeader:
+                name: "source"
+                jq: '.source'
+            - choice:
+                when:
+                - jq: '.source == "sensor-1"'
+                  steps:
+                  - setProperty:
+                      name: 'pulsar.apache.org/function.output'
+                      constant: 'far'
+                  - setBody:
+                      jq:
+                        expression: '.data'
+                        resultType: 'java.lang.String'
+                - jq: '.source == "sensor-2"'
+                  steps:
+                  - setProperty:
+                      name: 'pulsar.apache.org/function.output'
+                      constant: 'near'
+                  - setBody:
+                      jq:
+                        expression: '.data'
+                        resultType: 'java.lang.String'
             """;
 
         try (LocalRunner runner = runner(route)) {
