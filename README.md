@@ -51,7 +51,7 @@ If you are familiar with the [Apache Camel YAML SQL](https://camel.apache.org/co
 
 Some attributes of the function and record being processed are mapped to Camel's Exchange Properties:
 
-| Pulsar                   | Exchnage Property Name                   |
+| Pulsar                   | Exchange Property Name                   |
 |--------------------------|:-----------------------------------------|
 | Function ID              | pulsar.apache.org/function.id            |
 | Configured Output Topic  | pulsar.apache.org/function.output        |
