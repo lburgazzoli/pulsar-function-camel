@@ -8,9 +8,27 @@ jar: "../../target/camel-pulsar-function-999-SNAPSHOT.jar"
 className: "com.github.lburgazzoli.camel.pulsar.CamelFunction"
 logTopic: "persistent://public/default/logging-function-logs"
 userConfig:
-  route: |
-    - from:
-        uri: "direct:in"
-        steps:
-        - setBody:
-            constant: "foo"
+  steps: |
+    - setHeader:
+        name: "source"
+        jq: '.source'
+    - choice:
+        when:
+        - jq: '.source == "sensor-1"'
+          steps:
+          - setProperty:
+              name: 'pulsar.apache.org/function.output'
+              constant: 'far'
+          - setBody:
+              jq:
+                expression: '.data'
+                resultType: 'java.lang.String'
+        - jq: '.source == "sensor-2"'
+          steps:
+          - setProperty:
+              name: 'pulsar.apache.org/function.output'
+              constant: 'near'
+          - setBody:
+              jq:
+                expression: '.data'
+                resultType: 'java.lang.String'
