@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-name: Build and Publish
+name: Build Main
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
