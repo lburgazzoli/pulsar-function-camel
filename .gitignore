@@ -8,6 +8,8 @@ target
 .settings
 .factorypath
 .classpath
+.gradle/
 
 .DS_Store
 tmp/
+build/

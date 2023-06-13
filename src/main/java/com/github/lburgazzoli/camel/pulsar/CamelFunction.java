@@ -3,11 +3,7 @@ package com.github.lburgazzoli.camel.pulsar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Message;
-import org.apache.camel.ProducerTemplate;
-import org.apache.camel.TypeConversionException;
+import org.apache.camel.*;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.support.PluginHelper;
@@ -40,7 +36,7 @@ public class CamelFunction implements org.apache.pulsar.functions.api.Function<G
         this.camel.close();
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public Record<GenericObject> process(GenericObject input, Context context) throws Exception {
         Object nativeObject = input.getNativeObject();
@@ -99,10 +95,10 @@ public class CamelFunction implements org.apache.pulsar.functions.api.Function<G
         });
 
         return context
-                .newOutputRecordBuilder(outSchema)
-                .destinationTopic(outTopic)
-                .value(result.getMessage().getBody())
-                .properties(outProperties)
-                .build();
+            .newOutputRecordBuilder(outSchema)
+            .destinationTopic(outTopic)
+            .value(result.getMessage().getBody())
+            .properties(outProperties)
+            .build();
     }
 }

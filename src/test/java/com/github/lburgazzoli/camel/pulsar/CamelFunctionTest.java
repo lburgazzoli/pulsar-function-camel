@@ -1,6 +1,5 @@
 package com.github.lburgazzoli.camel.pulsar;
 
-
 import java.util.Collections;
 import java.util.Map;
 
@@ -40,8 +39,7 @@ public class CamelFunctionTest extends PulsarTestSupport {
         cfg.setInputs(Collections.singleton("sensors"));
         cfg.setOutput("output-1");
         cfg.setUserConfig(Map.of(
-            CamelFunction.CONFIG_KEY_STEPS, route
-        ));
+            CamelFunction.CONFIG_KEY_STEPS, route));
 
         return LocalRunner.builder()
             .functionConfig(cfg)

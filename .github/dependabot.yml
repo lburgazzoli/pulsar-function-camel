@@ -16,7 +16,7 @@
 #
 version: 2
 updates:
-  - package-ecosystem: "maven"
+  - package-ecosystem: "gradle"
     directory: "/"
     open-pull-requests-limit: 10
     labels:

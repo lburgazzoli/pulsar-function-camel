@@ -27,8 +27,8 @@ public final class CamelFunctionSupport {
             .put("group", String.format("%s/%s", context.getTenant(), context.getNamespace()))
             .put("id", context.getFunctionId())
             .withObject("/from")
-                .put("uri", "direct:" + context.getFunctionId())
-                .set("steps", steps);
+            .put("uri", "direct:" + context.getFunctionId())
+            .set("steps", steps);
 
         return ResourceHelper.fromString(
             context.getFunctionId() + ".yaml",
