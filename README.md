@@ -44,7 +44,7 @@ userConfig:
                 resultType: 'java.lang.String'
 ```
 
-If you are familiar with the [Apache Camel YAML SQL](https://camel.apache.org/components/3.20.x/others/yaml-dsl.html), you have probably noticed that the route does not start with `from` or `route` as you would probably expect and this is because the Camel Pulsar Function automatically create all the boilerplate that are required to wire the Camel's routing engine to the Pulsar Function runtime. Beside this small difference, all the [Apache Camel EIPs](https://camel.apache.org/components/3.20.x/eips/enterprise-integration-patterns.html) are available.
+If you are familiar with the [Apache Camel YAML DSL](https://camel.apache.org/components/3.20.x/others/yaml-dsl.html), you have probably noticed that the route does not start with `from` or `route` as you would probably expect and this is because the Camel Pulsar Function automatically create all the boilerplate that are required to wire the Camel's routing engine to the Pulsar Function runtime. Beside this small difference, all the [Apache Camel EIPs](https://camel.apache.org/components/3.20.x/eips/enterprise-integration-patterns.html) are available.
 
 
 ### Access to contextual data
