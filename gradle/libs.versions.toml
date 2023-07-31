@@ -6,7 +6,7 @@ junit = "5.10.0"
 testcontainers = "1.18.3"
 awaitility = "4.2.0"
 pulsar = "3.0.0"
-camel = "4.0.0-RC1"
+camel = "4.0.0-RC2"
 jackson = "2.14.2"
 
 versionsPlugin = "0.47.0"
