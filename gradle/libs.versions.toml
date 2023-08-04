@@ -5,7 +5,7 @@ assertj = "3.24.2"
 junit = "5.10.0"
 testcontainers = "1.18.3"
 awaitility = "4.2.0"
-pulsar = "3.0.0"
+pulsar = "3.0.1"
 camel = "4.0.0-RC2"
 jackson = "2.14.2"
 
