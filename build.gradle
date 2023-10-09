@@ -24,6 +24,7 @@ plugins {
     alias(libs.plugins.testRetry)
 
     id 'java-library'
+    id 'groovy'
 }
 
 group = 'com.github.lburgazzoli'
@@ -48,6 +49,12 @@ dependencies {
     implementation libs.bundles.jackson
     implementation libs.bundles.camel
     implementation libs.bundles.pulsar
+
+    implementation platform("org.apache.groovy:groovy-bom:${libs.versions.groovy.get()}")
+    implementation "org.apache.groovy:groovy"
+
+    testImplementation platform("org.spockframework:spock-bom:${libs.versions.spock.get()}")
+    testImplementation "org.spockframework:spock-core"
 
     testImplementation libs.bundles.testing
     testImplementation libs.bundles.testingIt

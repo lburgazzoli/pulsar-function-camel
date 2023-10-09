@@ -6,7 +6,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="pulsar.container" level="WARN">
+        <Logger name="pulsar.container" level="INFO">
             <AppenderRef ref="console"/>
         </Logger>
         <Root level="info">
