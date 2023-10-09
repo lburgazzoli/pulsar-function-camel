@@ -44,6 +44,7 @@ repositories {
 dependencies {
     api libs.slf4j
 
+    implementation libs.guava
     implementation libs.bundles.jackson
     implementation libs.bundles.camel
     implementation libs.bundles.pulsar

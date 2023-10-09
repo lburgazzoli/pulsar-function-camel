@@ -1,21 +1,22 @@
 [versions]
 log4j = "2.20.0"
-slf4j = "2.0.7"
+slf4j = "2.0.9"
 assertj = "3.24.2"
 junit = "5.10.0"
-testcontainers = "1.19.0"
+testcontainers = "1.19.1"
 awaitility = "4.2.0"
 pulsar = "3.1.0"
 camel = "4.0.1"
-jackson = "2.14.2"
+jackson = "2.15.2"
+guava = "32.1.2-jre"
 
-versionsPlugin = "0.48.0"
+versionsPlugin = "0.49.0"
 spotlessPlugin = "6.22.0"
 shadowPlugin = "8.1.1"
 testLoggerPlugin = "3.2.0"
 nexusPublishPlugin = "1.3.0"
 axionReleasePlugin = "1.15.5"
-testRetryPlugin = "1.5.5"
+testRetryPlugin = "1.5.6"
 
 [libraries]
 slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
@@ -30,6 +31,7 @@ log4jApi = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j
 log4jCore = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j" }
 log4jSlf4j = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", version.ref = "log4j" }
 log4j12 = { module = "org.apache.logging.log4j:log4j-1.2-api", version.ref = "log4j" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
 
 pulsarFunctions = { module = "org.apache.pulsar:pulsar-functions-api", version.ref = "pulsar"}
 pulsarFunctionsLocalRunner = { module = "org.apache.pulsar:pulsar-functions-local-runner-original", version.ref = "pulsar"}
