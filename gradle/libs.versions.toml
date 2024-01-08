@@ -1,6 +1,6 @@
 [versions]
 log4j = "2.22.1"
-slf4j = "2.0.9"
+slf4j = "2.0.10"
 assertj = "3.25.1"
 junit = "5.10.1"
 testcontainers = "1.19.3"
