@@ -1,4 +1,4 @@
-b# camel-pulsar-function
+# pulsar-function-camel
 
 The Camel Pulsar Function is a regular [Pulsar Function](https://pulsar.apache.org/docs/functions-overview/) that aims to provide a low-code approach to apply [Enterprise Integration Patters](https://www.enterpriseintegrationpatterns.com/) to process and transform data by leveraging [Apache Camel](https://camel.apache.org/)'s integration capabilities.
 
@@ -14,8 +14,8 @@ name: "camel"
 inputs:
   - "persistent://public/default/input-1"
 output: "persistent://public/default/output-1"
-jar: "build/libs/camel-pulsar-function-${version}-all.jar"
-className: "com.github.lburgazzoli.camel.pulsar.CamelFunction"
+jar: "build/libs/pulsar-function-camel-${version}-all.jar"
+className: "com.github.lburgazzoli.pulsar.function.camel.CamelFunction"
 logTopic: "persistent://public/default/logging-function-logs"
 userConfig:
   steps: |

@@ -1,3 +1,3 @@
 name: camel-function
 description: camel-function
-functionClass: com.github.lburgazzoli.camel.pulsar.CamelFunction
+functionClass: com.github.lburgazzoli.pulsar.function.camel.CamelFunction

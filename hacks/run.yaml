@@ -4,8 +4,8 @@ name: "camel"
 inputs:
   - "persistent://public/default/input-1"
 output: "persistent://public/default/output-1"
-jar: "../../target/camel-pulsar-function-999-SNAPSHOT.jar"
-className: "com.github.lburgazzoli.camel.pulsar.CamelFunction"
+jar: "../../target/pulsar-function-camel-999-SNAPSHOT.jar"
+className: "com.github.lburgazzoli.pulsar.function.camel.CamelFunction"
 logTopic: "persistent://public/default/logging-function-logs"
 userConfig:
   steps: |

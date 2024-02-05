@@ -1,4 +1,4 @@
-package com.github.lburgazzoli.camel.pulsar.support
+package com.github.lburgazzoli.pulsar.function.camel.support
 
 import org.apache.pulsar.client.api.Message
 import org.apache.pulsar.client.api.MessageId

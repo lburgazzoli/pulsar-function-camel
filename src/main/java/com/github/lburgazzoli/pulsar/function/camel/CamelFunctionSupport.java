@@ -1,4 +1,4 @@
-package com.github.lburgazzoli.camel.pulsar;
+package com.github.lburgazzoli.pulsar.function.camel;
 
 import org.apache.camel.spi.Resource;
 import org.apache.camel.support.ResourceHelper;

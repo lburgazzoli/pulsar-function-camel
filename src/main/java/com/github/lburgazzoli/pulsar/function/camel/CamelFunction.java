@@ -1,4 +1,4 @@
-package com.github.lburgazzoli.camel.pulsar;
+package com.github.lburgazzoli.pulsar.function.camel;
 
 import java.util.HashMap;
 import java.util.Map;

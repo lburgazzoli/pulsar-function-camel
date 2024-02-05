@@ -1,7 +1,7 @@
-package com.github.lburgazzoli.camel.pulsar
+package com.github.lburgazzoli.pulsar.function.camel
 
-import com.github.lburgazzoli.camel.pulsar.support.PulsarTestClient
-import com.github.lburgazzoli.camel.pulsar.support.PulsarTestSpec
+import com.github.lburgazzoli.pulsar.function.camel.support.PulsarTestClient
+import com.github.lburgazzoli.pulsar.function.camel.support.PulsarTestSpec
 import groovy.util.logging.Slf4j
 import org.apache.pulsar.client.api.Schema
 import org.slf4j.LoggerFactory

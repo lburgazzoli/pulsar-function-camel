@@ -1,6 +1,6 @@
-package com.github.lburgazzoli.camel.pulsar.support
+package com.github.lburgazzoli.pulsar.function.camel.support
 
-import com.github.lburgazzoli.camel.pulsar.CamelFunction
+import com.github.lburgazzoli.pulsar.function.camel.CamelFunction
 import org.apache.pulsar.common.functions.FunctionConfig
 import org.apache.pulsar.functions.LocalRunner
 import spock.lang.Specification
