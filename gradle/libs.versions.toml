@@ -8,7 +8,7 @@ awaitility = "4.2.1"
 pulsar = "3.2.2"
 camel = "4.5.0"
 jackson = "2.16.1"
-guava = "33.1.0-jre"
+guava = "33.2.0-jre"
 groovy = "4.0.15"
 spock = "2.3-groovy-4.0"
 
